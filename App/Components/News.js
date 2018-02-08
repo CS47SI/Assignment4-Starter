@@ -4,7 +4,6 @@ import { StyleSheet, SafeAreaView, View, TouchableOpacity, FlatList, Text, Linki
 import { material } from 'react-native-typography'
 import { Metrics, Colors } from '../Themes'
 
-
 export default class News extends Component {
   static defaultProps = { articles: [] }
 
@@ -25,18 +24,13 @@ export default class News extends Component {
       if (supported) {
         Linking.openURL(url);
       } else {
-        console.log("Don't know how to open URL: " + url);
+        console.log("Cannot open URL: " + url);
       }
     });
   }
 
   _renderItem = ({item}) => {
-
-    {/*let mediaContent = null;
-    if (item.multimedia[0] && item.multimedia[0].url) {
-      mediaContent = <Text>{item.multimedia[0].url}</Text>
-    }*/}
-
+    
     return (
       <TouchableOpacity style={styles.listRow} onPress={() => this._onPressItem(item)}>
         <View>

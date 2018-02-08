@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ActivityIndicator, Image, Button, TextInput, Keyboard, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ActivityIndicator, TextInput, Keyboard } from 'react-native';
 import { Images, Colors, Metrics } from '../Themes'
 import AppConfig from '../Config/AppConfig'
 import APIRequest from '../Config/APIRequest'
@@ -26,15 +26,18 @@ export default class Main extends React.Component {
   }
 
   resetColors() {
-    var newColors = [];
+    var newColors = this.state.colors.map(() => Colors.ember);
+
+    //alternative to using the map() function:
+    /*var newColors = [];
     for(var i = 0; i < this.state.colors.length; i++) {
       newColors.push(Colors.ember);
-    }
+    }*/
     this.setState({colors: newColors, category: ''});
   }
 
   async componentDidMount() {
-    this.loadArticles();
+    await this.loadArticles();
   }
 
   search = (queryString) => {
@@ -44,13 +47,17 @@ export default class Main extends React.Component {
   }
 
   changeCategory = (index, category) => {
-    var newColors = [];
-    for(var i = 0; i < this.state.colors.length; i++) {
-      if(i !== index) {
-        newColors.push(Colors.steel);
-      } else {
-        newColors.push(Colors.ember);
-      }
+    if(this.state.colors) {
+      var newColors = this.state.colors.map((color, i) => { //loop through every item in the colors array
+        if (i == index) { //and if it's our index
+          return Colors.ember; //replace it for the color ember
+        } else {
+          return Colors.steel;
+        }
+      });
+
+      //or we can filter our colors in one line:
+      //var newColors = this.state.colors.map((colors,i) => i == index ? Colors.ember : Colors.steel)
     }
     this.setState({colors: newColors, category: category, searchText: ""});
     this.loadArticles('', category);
@@ -60,7 +67,6 @@ export default class Main extends React.Component {
     this.setState({articles:[], loading: true});
     var resultArticles = [];
     if (category === '') {
-      // console.log(APIRequest);
       resultArticles = await APIRequest.requestSearchPosts(searchTerm);
     } else {
       var resultArticles = await APIRequest.requestCategoryPosts(category);
@@ -110,13 +116,9 @@ export default class Main extends React.Component {
           inputPlaceholder='Search for News'
           searchAction={this.search}
           textValue={this.state.searchText}
-          textChange={this.searchChanged}
-        />
+          textChange={this.searchChanged} />
 
         {this.getArticleContent()}
-
-        {//<Switcher />
-        }
 
       </View>
     );
@@ -129,11 +131,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingTop: Metrics.doubleBaseMargin,
   },
-  logo: {
-    height: '90%',
-    resizeMode: 'contain',
-  },
   activityIndicator: {
+    ...StyleSheet.absoluteFillObject,
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 });

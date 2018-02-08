@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ActivityIndicator, Image, Button, TextInput, AsyncStorage, WebView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, WebView } from 'react-native';
 import { Images, Colors, Metrics } from '../Themes'
 
 export default class Article extends React.Component {
@@ -20,6 +20,7 @@ export default class Article extends React.Component {
       </SafeAreaView>
     );
   }
+
 }
 
 const styles = StyleSheet.create({

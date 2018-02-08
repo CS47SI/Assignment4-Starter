@@ -17,7 +17,7 @@ export default class Search extends Component {
     if(this.props.textValue) {
       this.props.searchAction(this.props.textValue);
     } else {
-      console.warn("Empty string!");
+      console.warn("Can't search for an empty string 😏");
     }
   }
 
@@ -32,6 +32,7 @@ export default class Search extends Component {
           placeholder={inputPlaceholder}
           onChangeText={(text) => this.props.textChange(text)}
           value={this.props.textValue}
+          onSubmitEditing={this._search}
         />
 
         <TouchableOpacity style={styles.icon}

@@ -3,6 +3,7 @@ import Main from './App/Screens/Main'
 import Onboarding from './App/Screens/OnboardingScreen'
 import { AsyncStorage, StyleSheet, View, SafeAreaView } from 'react-native';
 export default class App extends React.Component {
+
   state = {
     hasDoneOnboarding: false
   }
@@ -10,8 +11,6 @@ export default class App extends React.Component {
   _onDone = () => {
     this.setState({hasDoneOnboarding: true});
   }
-
-
 
   render() {
     if(this.state.hasDoneOnboarding) {
@@ -23,7 +22,6 @@ export default class App extends React.Component {
     } else {
       return <Onboarding onDone={this._onDone} />;
     }
-
   }
 
 }

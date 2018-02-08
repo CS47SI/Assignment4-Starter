@@ -28,13 +28,13 @@ export default class OnboardingScreen extends React.Component {
               backgroundColor: '#fff',
               image: <Image style={styles.contentImage} source={Images.main} />,
               title: 'New York Times browser',
-              subtitle: 'Search the New York Times articles using any search term or category.',
+              subtitle: 'Search for New York Times articles using any search term or category.',
             },
             {
               backgroundColor: '#fff',
               image: <Image style={styles.contentImage} source={Images.article} />,
               title: 'In-app article view',
-              subtitle: 'Read your articles in app.',
+              subtitle: 'Read your articles without leaving the app.',
             },
           ]}
         />

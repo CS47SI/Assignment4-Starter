@@ -16,7 +16,6 @@ export default class NavigationButtons extends Component {
 
   render () {
 
-    //https://developer.nytimes.com/most_popular_api_v2.json#/Documentation/GET/mostemailed/%7Bsection%7D/%7Btime-period%7D.json
     return (
       <View style={styles.container}>
 
