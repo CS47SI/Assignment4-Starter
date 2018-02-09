@@ -15,9 +15,9 @@ export default class App extends React.Component {
   render() {
     if(this.state.hasDoneOnboarding) {
       return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
           <Main />
-        </SafeAreaView>
+        </View>
       );
     } else {
       return <Onboarding onDone={this._onDone} />;
